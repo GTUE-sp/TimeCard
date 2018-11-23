@@ -1,0 +1,50 @@
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Time Card Checker</title>
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</head>
+<body class="container">
+    <h1>DB for Time Card Checker</h1>
+
+    <button onclick="location.href='http://127.0.0.1:5500/QRcodeMaker.html'">遷移</button>
+
+    <form action="http://127.0.0.1:5000/confirm" method="post"> 
+        <div class="name-info row">
+            <h5>名前</h5>
+            <div class="input-field col s6">
+                <label for="kj-family-name">姓</label>
+                <input required="required" id="kj-family-name" placeholder="田中" type="text" name="kj_fam_name">
+            </div>
+            <div class="input-field col s6">
+                <label for="kj-first-name">名</label>
+                <input required="required" id="kj-first-name" placeholder="太郎" type="text" name="kj_fir_name"> 
+            </div>
+            <h5>フリガナ</h5>
+            <div class="input-field col s6">
+                <label for="ka-family-name">セイ</label>
+                <input required="required" id="ka-family-name" placeholder="タナカ" type="text" name="ka_fam_name"> 
+            </div>
+            <div class="input-field col s6">
+                <label for="ka-first-name">メイ</label>
+                <input required="required" id="ka-first-name" placeholder="タロウ" type="text" name="ka_fir_name"> 
+            </div>
+        </div>
+        <h5>メールアドレス</h5>
+        <div class="input-field col s12">
+            <input required="required" id="email" class="validate" placeholder="sXXXXX@salesio-sp.ac.jp" type="email" name="email">
+            <span class="helper-text" data-success="OK" data-error="メールアドレスの形式ではありません。"></span>
+        </div>
+        <div class="button">
+            <button id="submit" class="btn btn-large waves-effect waves-lights" type="submit">登録</button>
+        </div>
+    </form>
+</body>
+</html>
