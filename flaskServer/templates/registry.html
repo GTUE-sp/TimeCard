@@ -3,7 +3,6 @@
     <meta charset="utf-8">
     <title>Time Card Checker</title>
     <link rel="stylesheet" href="index.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,6 +12,9 @@
 </head>
 <body class="container">
     <h1>Time Card Checker 登録</h1>
+    {% if message %}
+    <h3>{{message}}</h3>
+    {% endif %}
     <form action="http://127.0.0.1:5000/confirm" method="post"> 
         <div class="name-info row">
             <h5>学籍番号</h5>

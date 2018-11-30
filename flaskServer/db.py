@@ -3,7 +3,7 @@ from datetime import datetime
 
 class DB:
     def __init__(self):
-        self.con = sqlite3.connect('DB.db', isolation_level = None)
+        self.con = sqlite3.connect('./DB.db', isolation_level = None)
         self.cur = self.con.cursor()
         self.init_db()
 
@@ -18,6 +18,13 @@ class DB:
             ka_first_name varchar(255)
         );
         """
+        self.con.execute(sql)
+        sql = u"""
+        create table if not exists administrator(
+            id varchar(255),
+            password varchar(255)
+        );
+        """ 
         self.con.execute(sql)
 
     def delete_table(self, table):
