@@ -6,6 +6,7 @@ window.onload = function() {
     var outputContainer = document.getElementById("output");
     var outputMessage = document.getElementById("outputMessage");
     var outputData = document.getElementById("outputData");
+    var isPosted = undefined;
 
     function drawLine(begin, end, color) {
         canvas.beginPath();
@@ -24,11 +25,27 @@ window.onload = function() {
         requestAnimationFrame(tick);
     });
 
-
+    function postForm(qrcodeData, base64) {
+        var form = document.createElement('form');
+        var field1 = document.createElement('input');
+        var field2 = document.createElement('input');
+        form.method = 'POST';
+        form.action = '/authQRcode';
+        field1.type = 'hidden';
+        field1.name = 'qrcodeData';
+        field1.value = qrcodeData;
+        field2.type = 'hidden';
+        field2.name = 'base64';
+        field2.value = base64;
+        form.appendChild(field1);
+        form.appendChild(field2);
+        document.body.appendChild(form);
+        form.submit();
+    }
 
     function tick() {
         loadingMessage.innerText = "読み込み中..."
-        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        if (video.readyState === video.HAVE_ENOUGH_DATA && typeof isPosted === "undefined") {
             loadingMessage.hidden = true;
             canvasElement.hidden = false;
             outputContainer.hidden = false;
@@ -46,14 +63,16 @@ window.onload = function() {
                 drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
                 outputMessage.hidden = true;
                 outputData.parentElement.hidden = false;
-                //outputData.innerText = code.data;
-                outputData.innerText = 'aaaaaa';
-                const base64 = canvasElement.toDataURL("image/png");
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'http://127.0.0.1:5000/authQRcode');
-                xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-                xhr.send('base64={$base64}');
-                //location.href = '/';
+                outputData.innerText = code.data;
+                const canvasBase64 = canvasElement.toDataURL('image/png');
+                //send_data(code.data, canvasBase64);
+
+                $("#video").remove();
+                $("#canvas").remove();
+                postForm(code.data, canvasBase64);
+                isPosted = true;
+
+                //location.href = '/authResult';
             } else {
                 outputMessage.hidden = false;
                 outputData.parentElement.hidden = true;
