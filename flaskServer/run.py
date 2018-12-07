@@ -12,6 +12,43 @@ app.config['DEBUG'] = True
 def index():
     return render_template('index.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/authAdmin', methods = ['POST'])
+def authAdmin():
+    if request.method == 'POST':
+        db = DB()
+        result = request.form
+        id = result['admin_id']
+        password = result['admin_password']
+        conditions = {'id':id, 'password':password}
+        if db.get_field('administrator', 'id', conditions):
+            message = 'ログインに成功しました'
+            auth_history = db.get_table_tuple('authHistory') 
+            auth_history_text = """
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日付時間</th>
+                            <th>名前</th>
+                            <th>写真</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            """
+            for line in auth_history:
+                auth_history_text += '<tr><td>' + line[0] + '</td><td>' + line[1] + '</td><td><img src="../static/Face/' + line[0] + '.png"></td></tr>'
+            auth_history_text += """
+                    </tbody>
+                </table>
+            """
+        else:
+            message = 'ログインに失敗しました'
+            auth_history_text = None
+        return render_template('admin.html', message = message, authHistory = auth_history_text)
+
 @app.route('/registry')
 def registry():
     return render_template('registry.html')

@@ -25,6 +25,9 @@ class DB:
             password varchar(255)
         );
         """ 
+        if(self.get_table_tuple('administrator') == []):
+            values = ['admin', 'password']
+            self.insert_record('administrator', values)
         self.con.execute(sql)
         sql = u"""
         create table if not exists authHistory(
