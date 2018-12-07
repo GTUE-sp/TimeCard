@@ -4,6 +4,7 @@ from PIL import Image
 from flask import Flask, request, redirect, render_template
 from db import DB
 import mkqrcode
+import datetime
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -23,10 +24,13 @@ def authQRcode():
     if not db.get_field('students', 'student_num', conditions):
         result = '有効なQRコードではありません。'
     else:
+        dt_now = str(datetime.datetime.now())
         enc_data  = request.form['base64']
         dec_data = base64.b64decode(enc_data.split(',')[1])#環境依存の様(","で区切って本体をdecode)
         dec_img  = Image.open(BytesIO(dec_data))
-        dec_img.save('./thumbnail_img.png', 'png')
+        dec_img.save('./static/Face/' + dt_now + '.png', 'png')
+        values = [dt_now, db.get_field('students', 'kj_family_name', conditions) + db.get_field('students', 'kj_first_name', conditions) ]
+        db.insert_record('authHistory', values)
         result = '認証に成功しました。'
     print(qrcode_data)
     return render_template('authResult.html', result = result)

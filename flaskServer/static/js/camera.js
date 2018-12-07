@@ -65,14 +65,10 @@ window.onload = function() {
                 outputData.parentElement.hidden = false;
                 outputData.innerText = code.data;
                 const canvasBase64 = canvasElement.toDataURL('image/png');
-                //send_data(code.data, canvasBase64);
-
                 $("#video").remove();
                 $("#canvas").remove();
                 postForm(code.data, canvasBase64);
                 isPosted = true;
-
-                //location.href = '/authResult';
             } else {
                 outputMessage.hidden = false;
                 outputData.parentElement.hidden = true;

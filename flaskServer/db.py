@@ -26,6 +26,13 @@ class DB:
         );
         """ 
         self.con.execute(sql)
+        sql = u"""
+        create table if not exists authHistory(
+            datetime varchar(255),
+            name varchar(255)
+        );
+        """
+        self.con.execute(sql)
 
     def delete_table(self, table):
         sql = "drop table %s" % (table)
