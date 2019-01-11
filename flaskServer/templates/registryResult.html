@@ -1,0 +1,35 @@
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Time Card Checker</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</head>
+
+<body class="container">
+    <h1>Time Card Checker 登録</h1>
+    {% if message %}
+    <h3>{{message}}</h3>
+    {% endif %}
+    {% if qrcode %}
+    <div class="row">
+        <div class="col s4">
+            <div class="card hoverable">
+                <div class="card-image">
+                    <img class="materialboxed" src={{qrcode}}>
+                </div>
+                <div class="card-content">
+                    <p>QRコードを保管してください。クリックで拡大できます。</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row">
+        <div class="col s12">
+            <button type="button" class="btn btn-large waves-effect waves-lights" onclick="history.back()">戻る</button>
+        </div>
+    </div>
+</body>
+</html>

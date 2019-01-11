@@ -4,8 +4,6 @@ window.onload = function() {
     var canvas = canvasElement.getContext("2d");
     var loadingMessage = document.getElementById("loadingMessage");
     var outputContainer = document.getElementById("output");
-    var outputMessage = document.getElementById("outputMessage");
-    var outputData = document.getElementById("outputData");
     var isPosted = undefined;
 
     function drawLine(begin, end, color) {
@@ -61,18 +59,12 @@ window.onload = function() {
                 drawLine(code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
                 drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
                 drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
-                outputMessage.hidden = true;
-                outputData.parentElement.hidden = false;
-                outputData.innerText = code.data;
                 const canvasBase64 = canvasElement.toDataURL('image/png');
                 $("#video").remove();
                 $("#canvas").remove();
                 postForm(code.data, canvasBase64);
                 isPosted = true;
-            } else {
-                outputMessage.hidden = false;
-                outputData.parentElement.hidden = true;
-            }
+            } 
         }
         requestAnimationFrame(tick);
     }

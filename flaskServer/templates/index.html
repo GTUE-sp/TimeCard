@@ -14,41 +14,9 @@
 <body class="container">
     <h1>Time Card Checker</h1>
     <h3>QRコード認証</h3>
-
     <div id="loadingMessage">ウェブカメラを使用許可してください</div>
     <canvas id="canvas" hidden></canvas>
-    <div id="output" hidden>
-        <div id="outputMessage">No QR code detected.</div>
-        <div hidden><span id="outputData"></span></div>
+        <div id="output" hidden>
     </div>
-
-    <h3>QRコード発行</h3>
-    <form action="http://127.0.0.1:5000/showQRcode" method="post">
-        <h5>学籍番号を入力してください</h5>
-        <div class="input-field col s6">
-            <input required="required" id="student-num" placeholder="sXXXXX" type="text" name="student-num">
-        </div> 
-        <div class="button">
-                <button id="submit" class="btn btn-large waves-effect waves-lights" type="submit">発行</button>
-        </div>
-    </form>
-    {% if qrcode %}
-    <div class="row">
-        <div class="col s4">
-            <div class="card hoverable">
-                <div class="card-image">
-                    <img class="materialboxed" src={{qrcode}}>
-                </div>
-                <div class="card-content">
-                    <p>QRコードを保管してください。クリックで拡大できます。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    {% if error %}
-    <h5>{{error}}</h5>
-    {% endif %}
-
 </body>
 </html>

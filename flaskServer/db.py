@@ -25,6 +25,7 @@ class DB:
             password varchar(255)
         );
         """ 
+        self.con.execute(sql)
         if(self.get_table_tuple('administrator') == []):
             values = ['admin', 'password']
             self.insert_record('administrator', values)

@@ -1,7 +1,6 @@
 import sys
 from db import DB
 
-
 def update_admin(new_id, new_password):
     db = DB()
     TABLE_NAME = 'administrator'
