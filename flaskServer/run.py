@@ -25,7 +25,7 @@ def authAdmin():
         password = result['admin_password']
         conditions = {'id':id, 'password':password}
         if db.get_field('administrator', 'id', conditions):
-            message = 'ログインに成功しました'
+            message = ''
             auth_history = db.get_table_tuple('authHistory') 
             auth_history_text = """
                 <table>
